@@ -56,7 +56,7 @@ const Tasks = (props: Props) => {
 
   const markSessionAsDone = () => {
     const deleteTask = tasks.filter((task, index) => {
-     return !(task.completed && task.thisSession);
+      return !(task.completed && task.thisSession);
     });
 
     const updatedTasks = deleteTask.map((task, index) => {
@@ -129,7 +129,8 @@ const Tasks = (props: Props) => {
             {tasks.map(
               (task, id) =>
                 task.thisSession === true && (
-                  <TaskCard key={id}
+                  <TaskCard
+                    key={id}
                     task={task}
                     id={id}
                     removeTask={removeTask}
@@ -145,6 +146,7 @@ const Tasks = (props: Props) => {
               (task, id) =>
                 task.thisSession === false && (
                   <TaskCard
+                    key={id}
                     task={task}
                     id={id}
                     removeTask={removeTask}
