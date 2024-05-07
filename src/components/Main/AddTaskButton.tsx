@@ -14,15 +14,13 @@ type Props = {
 const AddTaskButton = (props: Props) => {
   const handleKeyDown = (e: any) => {
     if (e.keyCode === 13 && props.currentTask.trim() !== "") {
-      // Call the handleAdd function to add the task
       props.handleAdd();
-      // Clear the input field after adding the task
       props.handleUserInput({ target: { value: "" } });
     }
   };
   return (
     <>
-      <div className="flex flex-col p-5 rounded-xl">
+      <div className="flex flex-col p-5 rounded-xl border border-slate-600 mb-2">
         <div className="flex items-center justify-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +35,7 @@ const AddTaskButton = (props: Props) => {
           </svg>
           <input
             type="text"
-            className="bg-transparent w-full pl-2"
+            className="bg-transparent w-full pl-2 border-b"
             placeholder="Add a task"
             value={props.currentTask}
             onChange={props.handleUserInput}
@@ -45,9 +43,8 @@ const AddTaskButton = (props: Props) => {
           />
         </div>
 
-        <div className="flex pt-10 justify-between items-center">
-          <div className="flex gap-x-2 items-center"></div>
-          <div className="flex gap-x-2">
+        <div className="flex pt-10 justify-end items-center ">
+          
             {props.currentTask == "" ? (
               <Button onClick={props.handleAdd} disabled>
                 Add Task
@@ -57,7 +54,7 @@ const AddTaskButton = (props: Props) => {
                 Add Task
               </Button>
             )}
-          </div>
+         
         </div>
       </div>
     </>

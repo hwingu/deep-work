@@ -74,7 +74,7 @@ const Tasks = (props: Props) => {
       toast("All tasks complete!", {
         action: {
           label: "Mark session as complete",
-          onClick: () => markSessionAsDone(),
+          onClick: markSessionAsDone,
         },
       });
     }

@@ -58,13 +58,16 @@ const Settings = (props: Props) => {
               value={props.userTime % 60}
               onChange={handleSeconds}
             />
-            <input
-              type="checkbox"
-              id="focus"
-              onChange={handleMode}
-              checked={props.focusMode}
-            />
-            <Label htmlFor="focus">Focus</Label>
+            <div className="mt-2 border-t-slate-500 border-t pt-2 items-center">
+              <input
+                className="pt-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                type="checkbox"
+                id="focus"
+                onChange={handleMode}
+                checked={props.focusMode}
+              />
+              <Label htmlFor="focus" className="pl-1 text-md">Focus</Label>
+            </div>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

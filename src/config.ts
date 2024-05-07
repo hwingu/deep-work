@@ -5,7 +5,7 @@ const config = {
   appName: "Deep Work",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "A timer to support deep work.",
+    "A timer that enhances concentration and facilitates deep work sessions, accompanied by a dedicated task list for focused productivity.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "deepwo.rk",
   crisp: {
