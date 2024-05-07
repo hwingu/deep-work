@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "../ui/label";
+
 
 type Props = {
   handleAdd: () => void;

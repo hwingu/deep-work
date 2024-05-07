@@ -1,10 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import useCountdown from "@/hooks/useCountdown";
 import Tasks from "@/components/Main/Tasks";
 import Settings from "@/components/Main/Settings";
 import { useState } from "react";
 import NavBar from "@/components/Main/NavBar";
+import useCountdown from "@/hooks/useCountdown";
+
 import { ListRestartIcon } from "lucide-react";
 
 export default function Home() {

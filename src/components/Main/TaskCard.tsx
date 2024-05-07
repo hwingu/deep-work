@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Button } from "../ui/button";
 type Task = {
   task: string;
   thisSession: boolean;
@@ -16,7 +15,7 @@ type Props = {
 
 const TaskCard = (props: Props) => {
   return (
-    <li key={props.id} className="border border-slate-600 p-4 flex mt-2 text-pretty">
+    <li className="border border-slate-600 p-4 flex mt-2 text-pretty">
       <input
         type="checkbox"
         id={props.id.toString()}

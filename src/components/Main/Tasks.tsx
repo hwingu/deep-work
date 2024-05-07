@@ -129,7 +129,7 @@ const Tasks = (props: Props) => {
             {tasks.map(
               (task, id) =>
                 task.thisSession === true && (
-                  <TaskCard
+                  <TaskCard key={id}
                     task={task}
                     id={id}
                     removeTask={removeTask}
