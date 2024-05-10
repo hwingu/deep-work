@@ -28,9 +28,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Analytics />
         </ThemeProvider>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
