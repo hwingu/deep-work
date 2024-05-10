@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import useSound from "use-sound";
 
 type Task = {
   task: string;
@@ -14,13 +15,18 @@ type Props = {
 };
 
 const TaskCard = (props: Props) => {
+  const [playOn] = useSound("/sounds/ding.mp3", {volume: 0.25})
   return (
-    <li className="border border-slate-600 p-4 flex mt-2 text-pretty">
+    <li className="border border-slate-600 p-4 flex mt-2 text-pretty items-center">
       <input
+        className="h-4 w-4"
         type="checkbox"
         id={props.id.toString()}
         onChange={() => props.completeTask(props.id)}
         checked={props.task.completed}
+        onMouseUp={() => {
+          !props.task.completed && playOn()
+        }}
       />
       {props.task.completed == true ? (
         <label

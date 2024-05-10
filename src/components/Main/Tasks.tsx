@@ -4,6 +4,8 @@ import AddTaskButton from "./AddTaskButton";
 import TaskCard from "./TaskCard";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import useSound from "use-sound";
+
 type Props = {};
 
 type Task = {
@@ -16,6 +18,8 @@ const Tasks = (props: Props) => {
   const [currentTask, setCurrentTask] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [thisSession, setThisSession] = useState(true);
+  const [taskDone, setTaskDone] = useState(false);
+  const [playOn] = useSound("/sounds/sessionDone.mp3", { volume: 0.25 });
 
   const handleAdd = () => {
     const newTask = {
@@ -40,6 +44,11 @@ const Tasks = (props: Props) => {
   };
   const checkAllComplete = () => {
     const sessionTasks = tasks.filter((task) => task.thisSession === true);
+    if (sessionTasks.some((task) => task.completed === true)) {
+      setTaskDone(true);
+    } else {
+      setTaskDone(false);
+    }
     return sessionTasks.every((task) => task.completed === true);
   };
   const completeTask = (taskIndex: number) => {
@@ -66,8 +75,10 @@ const Tasks = (props: Props) => {
       return task;
     });
     setTasks(updatedTasks);
+    playOn();
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
+  // Check if all task from this session is done
   useEffect(() => {
     const hasSessionTasks = tasks.some((task) => task.thisSession === true);
     if (hasSessionTasks && checkAllComplete() === true) {
@@ -122,7 +133,18 @@ const Tasks = (props: Props) => {
               </Button>
             )}
           </div>
-          <Button onClick={markSessionAsDone}>Mark session as done</Button>
+          {taskDone == false || tasks.length <= 0 ? <Button
+            onClick={markSessionAsDone}
+            className="focus:ring-4 active:scale-90 transition-transform mx-5"
+            disabled
+          >
+            Clear completed tasks
+          </Button> : <Button
+            onClick={markSessionAsDone}
+            className="focus:ring-4 active:scale-90 transition-transform mx-5"
+          >
+            Clear completed tasks
+          </Button>}
         </div>
         {thisSession == true ? (
           <ul className="flex flex-col">
