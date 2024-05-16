@@ -18,7 +18,7 @@ type Props = {
 const TaskItem = (props: Props) => {
   const [playOn] = useSound("/sounds/ding.mp3", { volume: 0.25 });
   return (
-    <li className="border border-slate-600 p-4 flex mt-2 text-pretty items-center text-left">
+    <li className="border border-slate-600 p-4 flex mt-2 items-center text-left">
       <input
         className="h-4 w-4"
         type="checkbox"

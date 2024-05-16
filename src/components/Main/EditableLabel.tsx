@@ -20,7 +20,7 @@ const EditableLabel = ({ task, id, changeLabel }: Props) => {
   const [currentText, setCurrentText] = useState("");
 
   return (
-    <div>
+    <>
       {edit === false ? (
         task.completed === true ? (
           <p
@@ -33,12 +33,18 @@ const EditableLabel = ({ task, id, changeLabel }: Props) => {
             {task.task}
           </p>
         ) : (
-          <p onClick={() => setEdit(true)} className="text-wrap p-2">
+          <p
+            onDoubleClick={() => {
+              setEdit(true);
+              setCurrentText(task.task);
+            }}
+            className="text-pretty p-2"
+          >
             {task.task}
           </p>
         )
       ) : (
-        <div className="flex gap-x-2 min-w-full">
+        <div className="flex gap-x-2">
           <input
             onChange={(e) => setCurrentText(e.target.value)}
             className="ml-2 bg-transparent"
@@ -66,7 +72,7 @@ const EditableLabel = ({ task, id, changeLabel }: Props) => {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
