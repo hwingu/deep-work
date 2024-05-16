@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import AddTaskButton from "./AddTaskButton";
-import TaskCard from "./TaskCard";
+import TaskItem from "./TaskItem";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import useSound from "use-sound";
+import { Check } from "lucide-react";
 
 type Props = {};
 
@@ -21,6 +22,16 @@ const Tasks = (props: Props) => {
   const [taskDone, setTaskDone] = useState(false);
   const [playOn] = useSound("/sounds/sessionDone.mp3", { volume: 0.25 });
 
+  const changeLabel = (id: number, currentText: string) => {
+    const updatedTask = tasks.map((task, index) => {
+      if (index == id) {
+        return { ...task, task: currentText };
+      }
+      return task;
+    });
+    setTasks(updatedTask);
+    localStorage.setItem("tasks", JSON.stringify(updatedTask));
+  };
   const handleAdd = () => {
     const newTask = {
       task: currentTask,
@@ -133,31 +144,41 @@ const Tasks = (props: Props) => {
               </Button>
             )}
           </div>
-          {taskDone == false || tasks.length <= 0 ? <Button
-            onClick={markSessionAsDone}
-            className="focus:ring-4 active:scale-90 transition-transform mx-5"
-            disabled
-          >
-            Clear completed tasks
-          </Button> : <Button
-            onClick={markSessionAsDone}
-            className="focus:ring-4 active:scale-90 transition-transform mx-5"
-          >
-            Clear completed tasks
-          </Button>}
+          {taskDone == false || tasks.length <= 0 ? (
+            <Button
+              onClick={markSessionAsDone}
+              className="focus:ring-4 active:scale-90 transition-transform mx-5"
+              disabled
+            >
+              <div className="flex justify-center items-center gap-x-2">
+                <Check />
+                <span className="hidden sm:block">Clear completed tasks</span>
+              </div>
+            </Button>
+          ) : (
+            <Button
+              onClick={markSessionAsDone}
+              className="focus:ring-4 active:scale-90 transition-transform mx-5"
+            >
+              <div className="flex justify-center items-center gap-x-2">
+                <Check />
+                <span className="hidden sm:block">Clear completed tasks</span>
+              </div>
+            </Button>
+          )}
         </div>
         {thisSession == true ? (
           <ul className="flex flex-col">
             {tasks.map(
               (task, id) =>
                 task.thisSession === true && (
-                  <TaskCard
+                  <TaskItem
                     key={id}
                     task={task}
                     id={id}
                     removeTask={removeTask}
-                    tasks={tasks}
                     completeTask={completeTask}
+                    changeLabel={changeLabel}
                   />
                 )
             )}
@@ -167,13 +188,13 @@ const Tasks = (props: Props) => {
             {tasks.map(
               (task, id) =>
                 task.thisSession === false && (
-                  <TaskCard
+                  <TaskItem
                     key={id}
                     task={task}
                     id={id}
                     removeTask={removeTask}
-                    tasks={tasks}
                     completeTask={completeTask}
+                    changeLabel={changeLabel}
                   />
                 )
             )}
